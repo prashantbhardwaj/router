@@ -31,3 +31,19 @@ DB_URL
 DB_QUEUE_OWNER
 </code>
 </pre>
+
+<strong>Environments</strong>
+<p>Below are various environments URLs</p>
+<pre>
+<code>
+Local: https://localhost:8088/router
+</code>
+</pre>
+
+<strong>REST Documentation</strong>
+<p>Documentation is auto generated for all endpoints using Swagger plugin. By default it is accessible at /{CONTEXT-PATH}/swagger-ui.html</p>
+<pre>
+<code>
+Local: http://localhost/router/swagger-ui.html
+</code>
+</pre>
