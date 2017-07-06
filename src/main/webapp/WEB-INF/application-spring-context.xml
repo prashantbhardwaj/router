@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:orcl="http://www.springframework.org/schema/orcl"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/data/orcl
+        http://www.springframework.org/schema/data/orcl/spring-data-orcl-1.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd ">
+
+	<util:properties id="appProperties" location="file:///${APPLICATION_PROPERTIES}" />
+
+	<context:property-placeholder
+		ignore-resource-not-found="false" system-properties-mode="FALLBACK"
+		properties-ref="appProperties" />
+
+	<context:annotation-config />
+
+	<tx:annotation-driven />
+
+	<context:component-scan base-package="com.prashant.projects.router" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+				<property name="marshaller" ref="jaxb2Marshaller" />
+				<property name="marshaller" ref="jaxb2UnMarshaller" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeFound">
+			<list>
+				<value>com.prashant.projects.router.model.xml.RequestClass</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="jaxb2UnMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeFound">
+			<list>
+				<value>com.prashant.projects.router.model.xml.ResponseClass</value>
+			</list>
+		</property>
+		<property name="marchallerProperties">
+			<map>
+				<entry key="jaxb.fragment">
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+</beans>

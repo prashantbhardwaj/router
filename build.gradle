@@ -8,6 +8,19 @@
 
 // Apply the java-library plugin to add support for Java Library
 apply plugin: 'java-library'
+apply plugin: 'jetty'
+apply plugin: 'war'
+group = "com.prashant.projects"
+
+//Embedded jetty for local development
+jettyRun {
+	contextPath = "/router"
+	httpPort = 8088
+}
+
+war {
+	archiveName "router.war"
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -17,6 +30,15 @@ repositories {
 }
 
 dependencies {
+
+	// Spring Framework
+	compile group: 'org.springframework', name: 'spring-core', version: '4.3.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-context', version: '4.3.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-web', version: '4.3.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-oxm', version: '4.3.0.RELEASE'
+	
+	compile group: 'org.picketbox', name: 'jboss-security-spi', version: '4.9.6.Final'
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
 
