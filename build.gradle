@@ -31,14 +31,20 @@ repositories {
 
 dependencies {
 
+	// commons-utils
+	compile files('C:/Users/Prashant Bhardwaj/workspace/CommonUtilities/build/libs/CommonUtilities.jar')
+
 	// Spring Framework
 	compile group: 'org.springframework', name: 'spring-core', version: '4.3.0.RELEASE'
 	compile group: 'org.springframework', name: 'spring-context', version: '4.3.0.RELEASE'
 	compile group: 'org.springframework', name: 'spring-web', version: '4.3.0.RELEASE'
 	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.0.RELEASE'
 	compile group: 'org.springframework', name: 'spring-oxm', version: '4.3.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-tx', version: '4.3.0.RELEASE'
 	
+	// Accessing JBoss vault
 	compile group: 'org.picketbox', name: 'jboss-security-spi', version: '4.9.6.Final'
+	
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
 
