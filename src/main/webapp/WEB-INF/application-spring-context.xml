@@ -28,7 +28,7 @@
 
 	<tx:annotation-driven />
 
-	<context:component-scan base-package="com.prashant.projects.router" />
+	<context:component-scan base-package="com.prashant.projects" />
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
